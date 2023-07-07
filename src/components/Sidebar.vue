@@ -1,39 +1,52 @@
 <template>
   <aside :class="`${is_expanded ? 'is_expanded' : ''}`">
     <button class="menu-toggle" @click="ToggleMenu">
-      <img src="../assets/menu-icons/union.svg" alt="Union Icon">
+      <img src="../assets/images/menu-icons/union.svg" alt="Union Icon">
     </button>
 
-    <!--    TODO BUILD PROFILE-->
+    <div class="welcome-profile-container">
+      <div class="welcome-profile-image">
+        <img src="../assets/images/profile/joan-wilkins.png" alt="Joan Wilkins' Profile Image"/>
+      </div>
+      <div class="welcome-profile-text">
+        <p>Welcome</p>
+        <p>Joan Wilkins</p>
+      </div>
+    </div>
 
     <div class="menu">
       <!--    TODO TRANSFORM THE MENU ITEM INTO A COMPONENT-->
       <router-link to="/" class="menu-button active">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-dashboard.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-dashboard.svg" alt="Dashboard icon"/>
+        </div>
         <div class="menu-button-text">Overview</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-analytics.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-analytics.svg" alt="Dashboard icon"/>
+        </div>
         <div class="menu-button-text">Stats</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-vehicles.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-vehicles.svg" alt="Dashboard icon"/>
+        </div>
         <div class="menu-button-text">Vehicles</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-service.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-service.svg" alt="Dashboard icon"/>
+        </div>
         <div class="menu-button-text">Config</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-map.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-map.svg" alt="Dashboard icon"/></div>
         <div class="menu-button-text">Map</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-chat.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-chat.svg" alt="Dashboard icon"/></div>
         <div class="menu-button-text">Notifications</div>
       </router-link>
       <router-link to="/" class="menu-button">
-        <div class="menu-button-icon"><img src="../assets/menu-icons/icon-settings.svg" alt="Dashboard icon"/></div>
+        <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-settings.svg" alt="Dashboard icon"/>
+        </div>
         <div class="menu-button-text">Settings</div>
       </router-link>
     </div>
@@ -67,7 +80,7 @@ aside {
   &.is_expanded {
     width: var(--sidebar-width-expanded);
 
-    .menu-button-text {
+    .menu-button-text, .welcome-profile-container {
       opacity: 1 !important;
     }
   }
@@ -77,8 +90,44 @@ aside {
     margin-bottom: 1rem;
   }
 
+  .welcome-profile-container {
+    transition: 0.4s ease-out;
+    opacity: 0;
+    margin-top: 63px;
+    display: flex;
+    flex-direction: row;
+    width: var(--sidebar-width-expanded);
+
+    .welcome-profile-image {
+      width: var(--sidebar-width);
+      text-align: center;
+      align-self: center;
+
+      img {
+        border-radius: 5px;
+      }
+    }
+
+    .welcome-profile-text {
+      align-self: center;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+
+      p:first-child {
+        color: var(--primary);
+        line-height: normal;
+      }
+
+      p:last-child {
+        color: var(--light);
+        line-height: 22px;
+      }
+    }
+  }
+
   .menu {
-    margin-top: 123px;
+    margin-top: 31px;
     display: flex;
     flex-direction: column;
 
@@ -100,7 +149,6 @@ aside {
       .menu-button-text {
         transition: 0.4s ease-out;
         align-self: center;
-        font-size: 15px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
