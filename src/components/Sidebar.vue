@@ -1,4 +1,5 @@
 <template>
+  <!--  TODO WORK ON RESPONSIVENESS -->
   <aside :class="`${is_expanded ? 'is_expanded' : ''}`">
     <button class="menu-toggle" @click="ToggleMenu">
       <img src="../assets/images/menu-icons/union.svg" alt="Union Icon">
@@ -115,6 +116,10 @@ aside {
       font-style: normal;
       font-weight: 400;
 
+      p {
+        margin-bottom: 0
+      }
+
       p:first-child {
         color: var(--primary);
         line-height: normal;
@@ -159,7 +164,7 @@ aside {
       &::before {
         content: "";
         height: 100%;
-        width: 3px;
+        width: 0;
         background: var(--active-menu-item-border);
         position: absolute;
         top: 0;
@@ -174,6 +179,7 @@ aside {
 
         &::before {
           opacity: 1;
+          width: 3px;
         }
       }
     }
