@@ -1,4 +1,5 @@
 <template>
+  <!--  TODO WORK ON RESPONSIVENESS -->
   <aside :class="`${is_expanded ? 'is_expanded' : ''}`">
     <button class="menu-toggle" @click="ToggleMenu">
       <img src="../assets/images/menu-icons/union.svg" alt="Union Icon">
@@ -16,35 +17,35 @@
 
     <div class="menu">
       <!--    TODO TRANSFORM THE MENU ITEM INTO A COMPONENT-->
-      <router-link to="/" class="menu-button active">
+      <router-link to="/" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-dashboard.svg" alt="Dashboard icon"/>
         </div>
         <div class="menu-button-text">Overview</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/stats" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-analytics.svg" alt="Dashboard icon"/>
         </div>
         <div class="menu-button-text">Stats</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/vehicles" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-vehicles.svg" alt="Dashboard icon"/>
         </div>
         <div class="menu-button-text">Vehicles</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/config" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-service.svg" alt="Dashboard icon"/>
         </div>
         <div class="menu-button-text">Config</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/map" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-map.svg" alt="Dashboard icon"/></div>
         <div class="menu-button-text">Map</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/notifications" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-chat.svg" alt="Dashboard icon"/></div>
         <div class="menu-button-text">Notifications</div>
       </router-link>
-      <router-link to="/" class="menu-button">
+      <router-link to="/settings" class="menu-button">
         <div class="menu-button-icon"><img src="../assets/images/menu-icons/icon-settings.svg" alt="Dashboard icon"/>
         </div>
         <div class="menu-button-text">Settings</div>
@@ -56,10 +57,11 @@
 <script setup>
 import {ref} from "vue";
 
-const is_expanded = ref(false);
+const is_expanded = ref(localStorage.getItem("is_expanded") === "true");
 
 const ToggleMenu = () => {
   is_expanded.value = !is_expanded.value;
+  localStorage.setItem("is_expanded", is_expanded.value);
 }
 </script>
 
@@ -114,6 +116,10 @@ aside {
       font-style: normal;
       font-weight: 400;
 
+      p {
+        margin-bottom: 0
+      }
+
       p:first-child {
         color: var(--primary);
         line-height: normal;
@@ -158,7 +164,7 @@ aside {
       &::before {
         content: "";
         height: 100%;
-        width: 3px;
+        width: 0;
         background: var(--active-menu-item-border);
         position: absolute;
         top: 0;
@@ -167,12 +173,13 @@ aside {
         transition: 0.4s ease-out;
       }
 
-      &.active, &:hover {
+      &.router-link-active, &:hover {
         background: var(--active-menu-item);
         //background: red;
 
         &::before {
           opacity: 1;
+          width: 3px;
         }
       }
     }

@@ -1,12 +1,16 @@
 <template>
   <div class="app">
     <Sidebar/>
-    <router-view/>
+    <div class="full-container">
+      <TopNavbar/>
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Sidebar from "./components/Sidebar.vue";
+import TopNavbar from "./components/TopNavbar.vue";
 </script>
 
 <style lang="scss">
@@ -33,6 +37,7 @@ import Sidebar from "./components/Sidebar.vue";
 }
 
 body {
+  color: var(--primary);
   background: var(--grey);
   font-size: var(--body-font-size);
 }
@@ -56,5 +61,15 @@ button {
       padding-left: 6rem;
     }
   }
+
+  .full-container{
+    display: block;
+    width: 100%;
+  }
+}
+
+.velocity-container {
+  width: min(1170px, 90%);
+  margin: 0 auto;
 }
 </style>
