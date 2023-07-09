@@ -68,7 +68,7 @@ const ToggleMenu = () => {
 <style lang="scss" scoped>
 //TODO CHECK WHY THERES MORE SPACE AT THE BOTTOM OF THE MENU ITEMS THAN AT THE TOP
 aside {
-  align-items: start;
+  align-items: flex-start;
   padding-top: 22.25px;
   display: flex;
   flex-direction: column;
