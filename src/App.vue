@@ -54,15 +54,13 @@ button {
   display: flex;
 
   main {
-    flex: 1 1 0;
-    padding: 2rem;
-
+    margin-top: 62px;
     @media (max-width: 768px) {
-      padding-left: 6rem;
+      margin-top: 30px;
     }
   }
 
-  .full-container{
+  .full-container {
     display: block;
     width: 100%;
   }
@@ -71,5 +69,29 @@ button {
 .velocity-container {
   width: min(1170px, 90%);
   margin: 0 auto;
+}
+
+h1 {
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 32px;
+
+  span {
+    color: var(--secondary);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+  }
+}
+
+.velocity-btn {
+  color: var(--white);
+  text-align: center;
+  padding: 10px 0;
+  width: 200px;
+  background: var(--blue);
+  border-radius: 5px;
 }
 </style>
