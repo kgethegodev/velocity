@@ -34,6 +34,7 @@ const new_message = true;
 .navbar {
   height: 80px;
   background: var(--white);
+  border-bottom: 1px solid #E4E8F0;
 }
 
 .velocity-container {
@@ -80,8 +81,8 @@ const new_message = true;
           display: block;
           border-radius: 50%;
           transition: 0.4s ease-out;
-          width: 9px;
-          height: 9px;
+          width: 15px;
+          height: 15px;
           background: var(--blue);
           border: 3px solid var(--grey);
           position: absolute;
