@@ -151,17 +151,16 @@ export default {
     },
 
     filter() {
-      if (this.trips_taken !== 0 || this.service_due !== 0 || this.vehicle_model !== '') {
+      if (this.trips_taken > 0 || this.service_due > 0 || this.vehicle_model !== '') {
         this.filtered_vehicles = [];
-
-        if (this.trips_taken !== 0) {
+        if (this.trips_taken > 0) {
           for (let i = 0; i < this.vehicles['vehicles'].length; i++) {
             if (this.vehicles['vehicles'][i].trips <= this.trips_taken) {
               this.filtered_vehicles.push(this.vehicles['vehicles'][i]);
             }
           }
         }
-        if (this.service_due !== 0) {
+        if (this.service_due > 0) {
           for (let i = 0; i < this.vehicles['vehicles'].length; i++) {
             const today = new Date();
             const service_date = new Date(this.vehicles['vehicles'][i].service_due);
@@ -180,6 +179,8 @@ export default {
             }
           }
         }
+      } else {
+        this.filtered_vehicles = this.vehicles.vehicles;
       }
     }
   }
@@ -187,7 +188,6 @@ export default {
   mounted() {
     this.getAllVehicles();
   }
-  ,
 }
 </script>
 
