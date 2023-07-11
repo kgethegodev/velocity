@@ -1,0 +1,11 @@
+<svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Loco Icon " clip-path="url(#clip0_0_150)">
+<path id="Rectangle" fill-rule="evenodd" clip-rule="evenodd" d="M14 0V9.33333C14 17.0653 7.73199 23.3333 0 23.3333L0 14C0 6.26801 6.26801 0 14 0Z" fill="#2CC2A5"/>
+<path id="Rectangle_2" fill-rule="evenodd" clip-rule="evenodd" d="M21.1362 5.78828L17.944 14.5587C15.2995 21.8244 7.26569 25.5707 0 22.9262L3.19219 14.1557C5.83668 6.89001 13.8705 3.14379 21.1362 5.78828Z" fill="#2E5BFF"/>
+</g>
+<defs>
+<clipPath id="clip0_0_150">
+<rect width="22" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>
