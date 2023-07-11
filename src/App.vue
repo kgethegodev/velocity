@@ -1,8 +1,9 @@
 <template>
   <div class="app">
-    <Sidebar/>
+    <Sidebar v-if="!isMobile()"/>
+    <MobileMenu v-else/>
     <div class="full-container">
-      <TopNavbar/>
+      <TopNavbar v-if="!isMobile()"/>
       <router-view/>
     </div>
   </div>
@@ -11,6 +12,11 @@
 <script setup>
 import Sidebar from "./components/Sidebar.vue";
 import TopNavbar from "./components/TopNavbar.vue";
+import MobileMenu from "./components/MobileMenu.vue";
+
+function isMobile() {
+  return screen.width <= 768;
+}
 </script>
 
 <style lang="scss">
@@ -52,6 +58,10 @@ button {
 
 .app {
   display: flex;
+  @media (max-width: 768px) {
+    display: block;
+    padding-top: 81px;
+  }
 
   main {
     margin-top: 62px;
@@ -67,7 +77,7 @@ button {
 }
 
 .velocity-container {
-  width: min(1170px, 90%);
+  width: min(1170px, calc(100% - 50px));
   margin: 0 auto;
 }
 
@@ -93,5 +103,9 @@ h1 {
   width: 200px;
   background: var(--blue);
   border-radius: 5px;
+
+  @media (max-width: 768px){
+    width: 100%;
+  }
 }
 </style>

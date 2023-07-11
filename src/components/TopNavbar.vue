@@ -1,5 +1,4 @@
 <template>
-<!--  TODO WORK ON RESPONSIVENESS -->
   <div class="navbar">
     <div class="velocity-container">
       <div class="navbar-row">

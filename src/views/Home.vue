@@ -1,26 +1,27 @@
 <template>
   <main v-if="!loading">
-    <div :class="`velocity-container ${is_filtered ? 'is_filtered' : ''} flex flex-row justify-between`">
+    <div
+        :class="`velocity-container ${is_filtered ? 'is_filtered' : ''} flex lg:flex-row md:flex-row flex-col justify-between`">
       <div class="content-container">
         <div class="w-full flex flex-row justify-between mb-8 items-center">
-          <div>
+          <div class="lg:block md:block hidden">
             <h1>Vehicles Dashboard <span>1 192 Total</span></h1>
           </div>
-          <div>
+          <div class="lg:w-auto md:w-auto w-full">
             <button class="velocity-btn" @click="ToggleFilter">
-              {{ is_filtered ? 'Hide Filters' : 'Show Filters' }}
+              {{ is_filtered  ? 'Hide Filters' : 'Show Filters' }}
             </button>
           </div>
         </div>
 
         <div class="vehicles-table">
-          <!--          TODO FIX THIS ACCORDING TO THE COMPONENT-->
           <div class="vehicles-heading-container flex flex-row">
-            <p class="vehicles-heading w-2/12 text-center">Name and ID</p>
-            <p class="vehicles-heading w-2/12">Vehicle Model</p>
-            <p class="vehicles-heading w-2/12">Next service</p>
-            <p class="vehicles-heading w-2/12">trips</p>
-            <p class="vehicles-heading w-4/12">Energy used</p>
+            <p class="vehicles-heading lg:w-2/12 md:w-2/12 w-1/3 lg:text-center md:text-center text-start">Name and
+              ID</p>
+            <p class="vehicles-heading w-2/12 lg:block md:block hidden">Vehicle Model</p>
+            <p class="vehicles-heading lg:w-2/12 md:w-2/12 w-2/3 ">Next service</p>
+            <p class="vehicles-heading w-2/12 lg:block md:block hidden">trips</p>
+            <p class="vehicles-heading w-4/12 lg:block md:block hidden">Energy used</p>
           </div>
 
           <VehicleInfo v-for="vehicle in this.filtered_vehicles" :vehicle="vehicle"/>
@@ -30,64 +31,72 @@
 
       <div class="filter-container">
         <div class="filter-block block w-full bg-white">
-          <p class="filter-heading">filter</p>
+          <div class="w-full flex flex-col justify-between h-full">
+            <div>
+              <p class="filter-heading">filter</p>
 
-          <div class="filter-input-block">
-            <div class="flex flex-row justify-between">
-              <label for="trips_taken">
-                Trips taken
-              </label>
-              <span class="input-count">{{ trips_taken }}</span>
+              <div class="filter-input-block">
+                <div class="flex flex-row justify-between">
+                  <label for="trips_taken">
+                    Trips taken
+                  </label>
+                  <span class="input-count">{{ trips_taken }}</span>
+                </div>
+                <input type="range" class="w-full" max="2000" id="trips_taken" :value="trips_taken"
+                       @change="setTripsTaken($event)">
+              </div>
+
+              <div class="filter-input-block">
+                <div class="flex flex-row justify-between">
+                  <label for="service_due">
+                    Service due
+                  </label>
+                  <span class="input-count">{{ service_due }} days</span>
+                </div>
+                <input type="range" class="w-full" id="service_due" :value="service_due"
+                       @change="setServiceDue($event)" max="21">
+              </div>
+
+              <div class="filter-input-block">
+                <div class="flex flex-row justify-between">
+                  <label for="trips_taken">
+                    Vehicle model
+                  </label>
+                </div>
+                <input type="text" class="w-full filter-text-input" @change="setVehicleModel($event)"
+                       placeholder="Vehicle model">
+              </div>
+
+              <div class="filter-input-block">
+                <div class="flex flex-row justify-between">
+                  <label for="trips_taken">
+                    Status
+                  </label>
+                </div>
+                <input type="text" class="w-full filter-text-input" placeholder="Status" @change="setStatus($event)">
+              </div>
+
+              <div class="filter-input-block">
+                <div class="flex flex-row justify-between">
+                  <label for="trips_taken">
+                    Location
+                  </label>
+                </div>
+                <input type="text" class="w-full filter-text-input" placeholder="Location"
+                       @change="setLocation($event)">
+              </div>
             </div>
-            <input type="range" class="w-full" max="2000" id="trips_taken" :value="trips_taken"
-                   @change="setTripsTaken($event)">
-          </div>
-
-          <div class="filter-input-block">
-            <div class="flex flex-row justify-between">
-              <label for="service_due">
-                Service due
-              </label>
-              <span class="input-count">{{ service_due }} days</span>
+            <div class = "lg:hidden md:hidden block">
+              <button class="velocity-btn" @click="ToggleFilter">
+                Hide Filters
+              </button>
             </div>
-            <input type="range" class="w-full" id="service_due" :value="service_due"
-                   @change="setServiceDue($event)" max="21">
           </div>
-
-          <div class="filter-input-block">
-            <div class="flex flex-row justify-between">
-              <label for="trips_taken">
-                Vehicle model
-              </label>
-            </div>
-            <input type="text" class="w-full filter-text-input" @change="setVehicleModel($event)"
-                   placeholder="Vehicle model">
-          </div>
-
-          <div class="filter-input-block">
-            <div class="flex flex-row justify-between">
-              <label for="trips_taken">
-                Status
-              </label>
-            </div>
-            <input type="text" class="w-full filter-text-input" placeholder="Status" @change="setStatus($event)">
-          </div>
-
-          <div class="filter-input-block">
-            <div class="flex flex-row justify-between">
-              <label for="trips_taken">
-                Location
-              </label>
-            </div>
-            <input type="text" class="w-full filter-text-input" placeholder="Location" @change="setLocation($event)">
-          </div>
-
         </div>
       </div>
     </div>
   </main>
 </template>
-<!--TODO LOGIC FOR FILTER TRY MAKE A FUNCTION THAT CONSIDERS ALL THE FILTER INPUTS INSTEAD OF DOING IT ONE BY ONE-->
 <script setup>
 import {ref} from "vue";
 import VehicleInfo from "../components/content/VehicleInfo.vue";
@@ -151,17 +160,16 @@ export default {
     },
 
     filter() {
-      if (this.trips_taken !== 0 || this.service_due !== 0 || this.vehicle_model !== '') {
+      if (this.trips_taken > 0 || this.service_due > 0 || this.vehicle_model !== '') {
         this.filtered_vehicles = [];
-
-        if (this.trips_taken !== 0) {
+        if (this.trips_taken > 0) {
           for (let i = 0; i < this.vehicles['vehicles'].length; i++) {
             if (this.vehicles['vehicles'][i].trips <= this.trips_taken) {
               this.filtered_vehicles.push(this.vehicles['vehicles'][i]);
             }
           }
         }
-        if (this.service_due !== 0) {
+        if (this.service_due > 0) {
           for (let i = 0; i < this.vehicles['vehicles'].length; i++) {
             const today = new Date();
             const service_date = new Date(this.vehicles['vehicles'][i].service_due);
@@ -180,6 +188,8 @@ export default {
             }
           }
         }
+      } else {
+        this.filtered_vehicles = this.vehicles.vehicles;
       }
     }
   }
@@ -187,7 +197,6 @@ export default {
   mounted() {
     this.getAllVehicles();
   }
-  ,
 }
 </script>
 
@@ -235,15 +244,36 @@ export default {
     text-transform: uppercase;
     margin-bottom: 26px;
   }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 51px;
+    left: 0;
+    height: calc(100vh - 51px);
+  }
 }
 
 .is_filtered {
   .filter-container {
-    width: calc(30% - 24px)
+    width: calc(30% - 24px);
+
+    @media (max-width: 768px) {
+      width: 100%;
+      background: rgba(46, 56, 77, 0.50);
+
+      .filter-block {
+        height: 100%;
+        width: min(298px, 70%);
+      }
+    }
   }
 
   .content-container {
-    width: 70%
+    width: 70%;
+
+    @media (max-width: 768px) {
+      width: 100%
+    }
   }
 }
 
@@ -260,6 +290,10 @@ export default {
       letter-spacing: 1.12px;
       text-transform: uppercase;
       margin-bottom: 12px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0;
     }
   }
 }
