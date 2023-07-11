@@ -9,16 +9,16 @@
         <p>#{{ props.vehicle.id }}</p>
       </div>
     </div>
-    <div class="profile-col">
+    <div class="profile-col lg:block md:block hidden">
       <p>{{ props.vehicle.model }}</p>
     </div>
     <div class="profile-col">
       <p>{{ props.vehicle.service_due }}</p>
     </div>
-    <div class="profile-col">
+    <div class="profile-col lg:block md:block hidden">
       <p>{{ props.vehicle.trips }}</p>
     </div>
-    <div class="profile-col">
+    <div class="profile-col lg:block md:block hidden">
       <p>{{ props.vehicle.energy_usage }} kWh</p>
     </div>
     <div class="profile-col text-right">
@@ -64,6 +64,14 @@ function getImageUrl(name) {
       width: 34px;
       height: 34px;
     }
+
+    @media (max-width: 768px) {
+      width: calc(100% / 3);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 12px
   }
 }
 </style>
